@@ -19,9 +19,42 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Social Network</a>
+                <a class="navbar-brand">Social Network</a>
               </div>
 
+                 <div id="navbar" class="navbar-collapse collapse">
+
+                     <!-- THIS WILL LIMIT TYPE OF PROFILE VIEW -->
+                     {% if user.is_authenticated %}
+
+                     <ul class="nav navbar-nav">
+                   <li><a href="/accounts/">Home</a></li>
+                    <li><a href="{% url 'accounts:view_profile' %}">Profile</a></li>
+                    <li><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
+                    <li><a href="{% url 'accounts:change_password' %}">Change Password</a></li>
+
+
+                         <!--WE SHOULD avoid hardcode uRL LIKE THIS-->
+                         <!--<li><a href="/accounts/profile">Profile</a></li>-->
+
+                         <!--AVOID HARDCODING-->
+                   <!--    -->
+
+                         <li><a href="{% url 'accounts:reset_password' %}">Reset Password</a></li>
+                         <li><a href="{% url 'accounts:change_password' %}">CHANGE PASSWORD</a></li>
+                    </ul>
+               <!--/.nav-collapse -->
+                 {% else %}
+                 <ul class="nav navbar-nav">
+                    <li><a href="/accounts/login">Login</a></li>
+                    </ul>
+               </div><!--/.nav-collapse -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/accounts/register">Register</a></li>
+
+                    </ul>
+
+                {% endif %}
             </div><!--/.container-fluid -->
           </nav>
         </div>

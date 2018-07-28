@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 # Create your views here.
 '''
 def home(request):
@@ -19,7 +20,10 @@ def home(request):
 '''
 
 def home(request):
+    '''#RENDER IS Combines a given template with a
+    given context dictionary and returns an HttpResponse object with that rendered text.
 
+    '''
     return render(request,'accounts/home.html')
 def logout(request):
     #return HttpResponse('Home page')
@@ -31,15 +35,18 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect(home)
+            #or return redirect(reverse('accounts:home'))
     else:
         form = RegistrationForm()
         args = {'form': form}
         return render(request, 'accounts/reg_form.html', args)
 
+#Below is decorator so that unwanted profile view for non logined user
+#@login_required
 def profile(request):
 
     args = {'user': request.user}
-    return render(request, 'accounts/profile.html', args)
+    return render(request,'accounts/profile.html', args)
 def edit_profile(request):
     if request.method == 'POST':
         form = UserChangeForm(request.POST, instance=request.user)

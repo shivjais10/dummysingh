@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+'tutorial.middleware.LoginRequiredMiddleware'
 ]
 
 ROOT_URLCONF = 'tutorial.urls'
@@ -64,7 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+                           ],
         },
     },
 ]
@@ -100,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -120,4 +121,31 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL='/accounts/'
+LOGIN_URL = '/accounts/login/'
+LOGIN_EXEMPT_URLS = (
+    r'^accounts/logout/$',
+    r'^accounts/register/$',
+    r'^accounts/reset-password/$',
+    r'^accounts/reset-password/done/$',
+    r'^accounts/reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+    r'^accounts/reset-password/complete/$',
+)
+
+
+
+
+
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhosts' # mail service smtp
+EMAIL_HOST_USER = 'shivamjaiswal10@gmail.com' # email id
+EMAIL_HOST_PASSWORD = 'dellintel20' #password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
